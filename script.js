@@ -8,29 +8,31 @@ const message = document.getElementById("message");
 
 form.addEventListener("submit", async (e) => {
 
-e.preventDefault();
+  e.preventDefault();
 
-const name = document.getElementById("name").value;
-const phone = document.getElementById("phone").value;
-const location = document.getElementById("location").value;
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const location = document.getElementById("location").value;
+  const plan = document.getElementById("plan").value;
 
-const { error } = await supabaseClient
-.from("internet_requests")
-.insert([
-{
-name: name,
-phone: phone,
-location: location
-}
-]);
+  const { error } = await supabaseClient
+    .from("internet_requests")
+    .insert([
+      {
+        name: name,
+        phone: phone,
+        location: location,
+        plan: plan
+      }
+    ]);
 
-if(error){
-message.innerText = "Something went wrong. Try again.";
-message.style.color = "red";
-}else{
-message.innerText = "Request sent! We will contact you shortly.";
-message.style.color = "green";
-form.reset();
-}
+  if (error) {
+    message.innerText = "Something went wrong. Try again.";
+    message.style.color = "red";
+  } else {
+    message.innerText = "Request sent! We will contact you shortly.";
+    message.style.color = "green";
+    form.reset();
+  }
 
 });
